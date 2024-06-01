@@ -3,7 +3,6 @@
 #include<vector>
 #include<queue>
 using namespace std;
-
 class MinStack {
 
 stack<int> cstack;
