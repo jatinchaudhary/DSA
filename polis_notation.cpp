@@ -33,7 +33,7 @@ for(int i=0;i<input.size();i++){
        else 
        if(input[i] == "/"){
         st.push(num1/num2);
-       }
+       } 
 
     
     }
