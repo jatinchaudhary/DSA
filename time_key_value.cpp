@@ -5,32 +5,57 @@
 using namespace std;
 
 
+///fix and run
+
 class TimeMap {
+
+    unordered_map<string,vector<pair<int,string>>> data = {};
+
+    int binarySearchNormal(vector<pair<int,string>> input,int target){
+    int start = 0;
+    int end = input.size()-1;
+    int mid = 0;
+
+
+    while(start<=end){
+        mid = (start+end)/2;
+
+    
+
+        if(input[mid].first == target){
+            return mid;
+        }
+        else if(input[mid].first>target){
+            end = mid - 1;
+        }
+        else{
+            start = mid +1;
+        }
+    }
+
+    return mid;
+
+  //  return -1;
+}
+
 public:
-    struct comp_pair_int {
-    bool operator()(const pair<int,string> &a, const int & b)
-    {
-        return (a.first < b);
+    TimeMap() {
+        
     }
-    bool operator()(const int & a,const pair<int,string> &b)
-    {
-        return (a < b.first);
-    }
-};
-    unordered_map<string,vector<pair<int,string>>> um;
-    TimeMap() { }
     
     void set(string key, string value, int timestamp) {
-        um[key].push_back(make_pair(timestamp,value)); 
+        data[key].push_back(make_pair(timestamp,value));
     }
     
     string get(string key, int timestamp) {
-        if(!um.count(key)) return "";
-        int i = upper_bound(um[key].begin(),um[key].end(),timestamp,comp_pair_int()) - um[key].begin()-1;
-        if(!(i<0 || i>um[key].size()-1)) return um[key][i].second;
-        else return "";
+
+        int index = binarySearchNormal(data[key],timestamp);
+
+        return data[key][index].second;
+        
     }
 };
+
 int main(){
 
 }
